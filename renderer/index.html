@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' media: https://*.alicdn.com data:">
+<meta name="color-scheme" content="light dark">
+<title>Alibaba 1688 Scraper</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" class="sprite" aria-hidden="true">
+  <symbol id="i-gear" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm7.4-3a7.5 7.5 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7.6 7.6 0 0 0-2-1.2L14.5 3h-4l-.4 2.6a7.6 7.6 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7.500 7.500 0 0 0 0 2.400l-2 1.600 2 3.400 2.400-1a7.600 7.600 0 0 0 2 1.200l.4 2.600h4l.4-2.600a7.600 7.600 0 0 0 2-1.200l2.400 1 2-3.400-2-1.600c.1-.4.1-.8.1-1.200Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.500 4.500 4.500L19 7.500"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 8v5m0 3.500v.01M10.300 4.100 2.800 17.200A2 2 0 0 0 4.500 20h15a2 2 0 0 0 1.700-2.800L13.700 4.100a2 2 0 0 0-3.400 0Z"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.700" fill="currentColor"/><circle cx="12" cy="12" r="1.700" fill="currentColor"/><circle cx="19" cy="12" r="1.700" fill="currentColor"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.700" stroke-linejoin="round" d="M3 7a2 2 0 0 1 2-2h4l2 2.500h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 13 4.500-5 3.500 3.500 2.500-2.500L21 17M8.500 9.500h.01"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.500v13a1 1 0 0 0 1.500.9l10.500-6.500a1 1 0 0 0 0-1.700L9.500 4.600A1 1 0 0 0 8 5.500Z"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="brand-name">Alibaba 1688 Scraper</span>
+  </div>
+  <div class="top-actions">
+    <button class="pill" id="pill-alibaba" type="button"><span class="dot"></span><span>Alibaba</span><span class="pill-state" id="state-alibaba">Log in</span></button>
+    <button class="pill" id="pill-1688" type="button"><span class="dot"></span><span>1688</span><span class="pill-state" id="state-1688">Log in</span></button>
+    <button class="icon-btn" id="open-settings" type="button" aria-label="Settings" title="Settings"><svg><use href="#i-gear"/></svg></button>
+  </div>
+</header>
+
+<div class="banner warn" id="banner" role="alert" hidden>
+  <svg class="banner-icon"><use href="#i-alert"/></svg>
+  <div class="banner-text"><strong id="banner-title"></strong><span id="banner-body"></span></div>
+  <button class="btn" id="banner-action" type="button">Show window</button>
+</div>
+<div class="banner info" id="restore" hidden>
+  <div class="banner-text"><strong id="restore-title"></strong><span>They were still waiting when you closed the app.</span></div>
+  <button class="btn ghost" id="restore-discard" type="button">Discard</button>
+  <button class="btn primary" id="restore-go" type="button">Continue</button>
+</div>
+
+<main class="page">
+  <section class="add" aria-labelledby="add-title">
+    <h1 id="add-title">Add products</h1>
+    <div class="paste" id="paste">
+      <textarea id="urls" spellcheck="false" aria-label="Product links" placeholder="Paste product links here, one per line.&#10;You can also drop a .txt file or drag links in from your browser."></textarea>
+      <div class="drop-hint" id="drop-hint">Drop to add links</div>
+    </div>
+    <div class="add-foot">
+      <p class="parse" id="parse" aria-live="polite">Alibaba and 1688 product pages are supported.</p>
+      <button class="btn ghost" id="load-file" type="button">Open a .txt file</button>
+      <input type="file" id="file" accept=".txt,.csv,text/plain" hidden>
+      <button class="btn primary" id="start" type="button" disabled>Start scraping</button>
+    </div>
+  </section>
+
+  <section class="start-guide" id="guide" aria-labelledby="guide-title">
+    <h2 id="guide-title">Before your first batch</h2>
+    <ul>
+      <li id="g-login"><span class="tick"><svg><use href="#i-check"/></svg></span><div><strong>Log in to 1688</strong><span>Use the buttons at the top right. 1688 shows far fewer captchas when you are signed in. Alibaba works without an account.</span></div></li>
+      <li id="g-links"><span class="tick"><svg><use href="#i-check"/></svg></span><div><strong>Paste product links</strong><span>Use the full product page address, for example detail.1688.com/offer/… or alibaba.com/product-detail/….</span></div></li>
+      <li id="g-files"><span class="tick"><svg><use href="#i-check"/></svg></span><div><strong>Find your files</strong><span>Each product gets its own folder with images, variants, description images, videos and a product.json.</span> <button class="link" id="guide-folder" type="button"></button></div></li>
+    </ul>
+  </section>
+
+  <section class="batch" id="batch" aria-label="Batch progress" hidden>
+    <div class="batch-head">
+      <div>
+        <p class="batch-title" id="batch-title"></p>
+        <p class="batch-sub" id="batch-sub"></p>
+      </div>
+      <div class="batch-actions">
+        <button class="btn small" id="pause" type="button" hidden>Pause</button>
+        <button class="btn small" id="stop" type="button" hidden>Stop</button>
+        <button class="btn small ghost" id="retry-failed" type="button" hidden>Retry failed</button>
+        <button class="btn small ghost" id="clear" type="button" hidden>Clear finished</button>
+      </div>
+    </div>
+    <div class="strip" id="strip" role="list" aria-label="Products in this batch"></div>
+  </section>
+
+  <section class="queue" aria-label="Products">
+    <ul class="rows" id="rows"></ul>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Saving to</span>
+  <button class="link" id="foot-folder" type="button"></button>
+  <span class="spacer"></span>
+  <button class="link" id="open-activity" type="button">Activity</button>
+</footer>
+
+<aside class="drawer" id="drawer" aria-label="Product details" aria-hidden="true">
+  <div class="drawer-head">
+    <img id="d-thumb" alt="">
+    <div class="drawer-title">
+      <h2 id="d-title"></h2>
+      <p id="d-sub"></p>
+    </div>
+    <button class="icon-btn" id="d-close" type="button" aria-label="Close details"><svg><use href="#i-x"/></svg></button>
+  </div>
+  <div class="drawer-actions">
+    <button class="btn" id="d-folder" type="button">Open folder</button>
+    <button class="btn ghost" id="d-site" type="button">Open product page</button>
+    <button class="btn ghost" id="d-json" type="button">View product.json</button>
+  </div>
+  <div class="drawer-body" id="d-body"></div>
+</aside>
+<div class="scrim" id="scrim" hidden></div>
+
+<dialog id="settings" class="modal" aria-labelledby="settings-title">
+  <form method="dialog" class="modal-head"><h2 id="settings-title">Settings</h2><span class="saved" id="saved" aria-live="polite"></span><button class="icon-btn" aria-label="Close settings"><svg><use href="#i-x"/></svg></button></form>
+  <div class="modal-body">
+    <fieldset>
+      <legend>Save location</legend>
+      <div class="field-row"><input id="outputDir" readonly aria-label="Save location"><button class="btn" id="choose" type="button">Change</button></div>
+    </fieldset>
+    <fieldset>
+      <legend>What to download</legend>
+      <label class="switch"><input type="checkbox" id="downloadVariants"><span class="track"></span><span class="sw-text"><strong>Variant images</strong><small>Colour and style pictures from the option picker.</small></span></label>
+      <label class="switch"><input type="checkbox" id="downloadDescription"><span class="track"></span><span class="sw-text"><strong>Description images</strong><small>The long images in the product description.</small></span></label>
+      <label class="switch"><input type="checkbox" id="downloadVideos"><span class="track"></span><span class="sw-text"><strong>Videos</strong><small>The product video in its best quality.</small></span></label>
+    </fieldset>
+    <fieldset>
+      <legend>Upscaling</legend>
+      <label class="switch"><input type="checkbox" id="upscale"><span class="track"></span><span class="sw-text"><strong>Make images sharper</strong><small id="upnote">Creates a 4× larger copy of each image with AI. Originals are kept.</small></span></label>
+      <div class="range" id="skip-wrap">
+        <label for="skipAtLeast">Skip images that are already <output id="skip-out"></output> px or larger</label>
+        <input type="range" id="skipAtLeast" min="600" max="3000" step="100">
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Speed</legend>
+      <div class="seg" role="radiogroup" aria-label="Speed">
+        <label><input type="radio" name="speed" value="safe"><span>Careful</span></label>
+        <label><input type="radio" name="speed" value="normal"><span>Balanced</span></label>
+        <label><input type="radio" name="speed" value="fast"><span>Fast</span></label>
+      </div>
+      <p class="hint" id="speed-hint"></p>
+    </fieldset>
+    <fieldset>
+      <legend>Accounts</legend>
+      <div class="field-row"><p class="hint grow" id="acct-hint"></p><button class="btn danger" id="logout" type="button">Sign out of both sites</button></div>
+    </fieldset>
+    <p class="about" id="about"></p>
+  </div>
+</dialog>
+
+<dialog id="activity" class="modal" aria-labelledby="activity-title">
+  <form method="dialog" class="modal-head"><h2 id="activity-title">Activity</h2><button class="icon-btn" aria-label="Close activity"><svg><use href="#i-x"/></svg></button></form>
+  <div class="modal-body"><ol class="log" id="log"><li class="empty-log">Nothing has happened yet.</li></ol></div>
+</dialog>
+
+<dialog id="json-view" class="modal wide" aria-labelledby="json-title">
+  <form method="dialog" class="modal-head"><h2 id="json-title">product.json</h2><button class="icon-btn" aria-label="Close"><svg><use href="#i-x"/></svg></button></form>
+  <div class="modal-body"><pre id="json-pre"></pre></div>
+</dialog>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-label="Image preview">
+  <button class="icon-btn lb-close" id="lb-close" type="button" aria-label="Close preview"><svg><use href="#i-x"/></svg></button>
+  <button class="lb-nav prev" id="lb-prev" type="button" aria-label="Previous image"><svg><use href="#i-chevron"/></svg></button>
+  <img id="lb-img" alt="">
+  <button class="lb-nav next" id="lb-next" type="button" aria-label="Next image"><svg><use href="#i-chevron"/></svg></button>
+  <p class="lb-count" id="lb-count"></p>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>

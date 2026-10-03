@@ -1,0 +1,24 @@
+# dependencies and build output
+node_modules/
+dist/
+release/
+
+# upscaler binaries and models are fetched by `npm run get-upscaler`
+bin/
+
+# local tool/session data
+.remember/
+.claude/
+
+# scraped output and runtime data
+Alibaba-Scraper/
+*.csv
+*.log
+queue.json
+settings.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
