@@ -1,0 +1,65 @@
+{
+  "name": "alibaba-1688-scraper",
+  "version": "1.0.0",
+  "description": "Paste Alibaba / 1688 product links, get full-resolution images, videos, product data and optional AI upscaling.",
+  "main": "main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test",
+    "get-upscaler": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/get-upscaler.ps1",
+    "dist": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "local.alibaba1688.scraper",
+    "productName": "Alibaba 1688 Scraper",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main/**",
+      "renderer/**",
+      "build/icon.png",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "bin",
+        "to": "bin",
+        "filter": [
+          "realesrgan-ncnn-vulkan.exe",
+          "vcomp140.dll",
+          "models/realesrgan-x4plus.*",
+          "models/realesrgan-x4plus-anime.*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "signExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "Alibaba-1688-Scraper-Setup-${version}.exe",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico"
+    }
+  },
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3"
+  },
+  "author": "Alibaba1688 Scraper"
+}
