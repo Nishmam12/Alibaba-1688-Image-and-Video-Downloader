@@ -2,6 +2,7 @@
   "name": "alibaba-1688-scraper",
   "version": "1.0.0",
   "description": "Paste Alibaba / 1688 product links, get full-resolution images, videos, product data and optional AI upscaling.",
+  "license": "PolyForm-Noncommercial-1.0.0",
   "main": "main/main.js",
   "scripts": {
     "start": "electron .",

@@ -132,4 +132,6 @@ AI sharpening uses the Windows build of [Real-ESRGAN](https://github.com/xinntao
 
 ## License
 
-**All rights reserved.** The source is public so you can read it, build it for your own personal use and report problems. You may not copy, redistribute, resell or build derivative products from it without written permission. To ask, open an issue on this repository.
+Released under the [PolyForm Noncommercial License 1.0.0](LICENSE).
+
+In plain words: you can read the code, run it, modify it and share it for **noncommercial** purposes, including personal use, research, study and hobby projects. You may **not** use it, or anything built from it, to make money or in a business without the author's written permission. The [LICENSE](LICENSE) file is the legally binding text. For commercial use, open an issue on this repository to ask.
