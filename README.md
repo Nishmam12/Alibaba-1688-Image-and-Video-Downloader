@@ -83,8 +83,8 @@ The detailed per-site logic is intentionally not documented here.
 Requires Windows and a current LTS release of [Node.js](https://nodejs.org/) (developed on Node 24).
 
 ```powershell
-git clone https://github.com/Nishmam12/Alibaba-1688-Scraper.git
-cd Alibaba-1688-Scraper
+git clone https://github.com/Nishmam12/Alibaba-1688-Image-and-Video-Downloader.git
+cd Alibaba-1688-Image-and-Video-Downloader
 npm install
 npm run get-upscaler   # downloads the Real-ESRGAN binaries (optional, for AI sharpening)
 npm start              # run the app
